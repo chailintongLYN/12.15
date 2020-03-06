@@ -1,112 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
+  	<title>表单作业</title>
 	<meta charset="UTF-8">
-	<title>任务07</title>
-	<link rel="stylesheet" href="style.css">
-	<script src="animate.js"></script>
 </head>
+<style>
+*{
+padding: 0;
+margin: 0;
+}
+.box{
+    width: 300px;
+    height: 400px;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+.ge{
+    width: 260px;
+    height: 25px;
+    left: 10px;
+    margin: auto;
+    margin: 0 auto;
+}
+.kuang{
+    padding-left: 20px;
+}
+.ke{
+    width: 260px;
+    height: 25px;
+    left: 10px;
+    margin: auto;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.dang{
+    color:red;
+}
+</style>
 <body>
-	<div class="box" id="box">
-		<div class="slider" id="slider">
-			<div class="tiao"></div>
-			<div class="slide"><img src="imgs/b5.png" olt=""></div>
-			<div class="slide"><img src="imgs/b1.png" olt=""></div>
-			<div class="slide"><img src="imgs/b2.png" olt=""></div>
-			<div class="slide"><img src="imgs/b3.png" olt=""></div>
-			<div class="slide"><img src="imgs/b4.png" olt=""></div>
-			<div class="slide"><img src="imgs/b5.png" olt=""></div>
-			<div class="slide"><img src="imgs/b1.png" olt=""></div>
-		</div>
-		<span id="left"><</span>
-		<span id="right">></span>
-		<ul class="nav" id="nav">
-			<li class="active">1</li>
-			<li>2</li>
-			<li>3</li>
-			<li>4</li>
-			<li>5</li>
-		</ul>
-	</div>
-	<script>
-		var box = document.getElementById('box');
-		var oNavlist = document.getElementById('nav').children;
-		var slider = document.getElementById('slider');
-		var left = document.getElementById('left');
-		var right = document.getElementById('right');
-		var tupian = document.getElementById('tupian');
-		var zi = document.getElementById('zi');
-		var index = 1;
-		var timer;
-		var isMoving = false;
-		//轮播下一张函数
-		function next(){
-			if(isMoving){
-				return;
-			}
-			isMoving = true;
-			index++;
-			navchange();
-			animate(slider,{left:-1200*index},function(){
-				if(index === 6){
-					slider.style.left = '-1200px';
-					index = 1;
-				}
-				isMoving = false;
-			});
-		}
-		function prev(){
-			if(isMoving){
-				return;
-			}
-			isMoving = true;
-			index--;
-			navchange();
-			animate(slider,{left:-1200*index},function(){
-				if(index === 0){
-					slider.style.left = "-6000px";
-					index = 5;
-				}
-				isMoving = false;
-			});
-		}		
-		var timer = setInterval(next,3000);	
-		//鼠标划入清定时器
-		box.onmouseover = function(){
-			animate(left, {opacity:50});
-			animate(right, {opacity:50});
-			clearInterval(timer)
-		}
-		//鼠标划出开定时器
-		box.onmouseout = function(){
-			animate(left, {opacity:0})
-			animate(right, {opacity:0})
-			timer = setInterval(next,3000);
-		}
-		right.onclick = next;
-		left.onclick = prev;
-		//小按钮点击事件
-		for(var i = 0;i<oNavlist.length;i++){
-			oNavlist[i].idx = i;
-			oNavlist[i].onclick = function(){
-				index = this.idx+1;
-				navchange();
-				animate(slider,{left:-1200*index});
-			}
-		}
-		//小按钮背景色切换
-		function navchange(){
-			for(var i = 0;i<oNavlist.length;i++){
-				oNavlist[i].className = '';
-			}
-			if(index === 6){
-				oNavlist[0].className = 'active';
-			}else if(index === 0){
-				oNavlist[4].className = 'active';
-			}else{
-				oNavlist[index-1].className = 'active';
-			}
-		}
-	</script>
+    <div class="box">
+        <h1>学生信息</h1>
+        <fieldset class="kuang">
+            <legend class="dang">学生档案</legend>
+            <form id="testform" method="get" action="#S">	
+                姓名： <br/>
+                <input class="ge" text" name="name1" required placeholder="请输入姓名"/><br/>
+                学号：<br/>
+                <input class="ge" type="number" name="num1" placeholder="请输入学号" required/><br/>
+                手机号码：<br/>
+                <input class="ge" type="number" name="shou" placeholder="请输入手机号" required/><br/>
+                邮箱地址：<br/>
+                <input class="ge" type="email" name="email" placeholder="请输入邮箱地址" required/><br/>
+                录取学校：<br/>
+                <input class="ge" type="search" name="school" list="list"/><br/>
+                <datalist id="list">
+                    <option>河北师范大学</option>
+                    <option>北京师范大学</option>
+                    <option>北京科技大学</option>
+                    <option>北京大学</option>
+                    <option>清华大学</option>
+                </datalist>
+                入学成绩：<br/>
+                <input class="ge" type="number" name="mark"/><br/>
+                入学时间：<br/>
+                <input class="ge" type="date"/><br/>
+                <input class="ke" type="submit" value="提交"/>
+            </form>
+        </fieldset>
+    </div>
 </body>
 </html>
